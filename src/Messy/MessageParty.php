@@ -8,7 +8,23 @@ class MessageParty implements MessagePartyInterface
   
   public function getNormalizedPhoneNumber()
   {
-    return $this->phone_number;
+    if ($this->phone_number == '') {
+      return null;
+    }
+    
+    $normalized_phone_number = $this->phone_number;
+    
+    if (substr($this->phone_number, 0, 1) == '0') {
+      $normalized_phone_number = '+46' . substr($normalized_phone_number, 1);
+    }
+    
+    $normalized_phone_number = preg_replace('/[-\s\/]/', '', $normalized_phone_number);
+    
+    if (!preg_match('/^\+?[0-9]+$/', $normalized_phone_number)) {
+      throw new InvalidPhoneNumberException;
+    }
+    
+    return $normalized_phone_number;
   }
   
   public function getName()
@@ -26,3 +42,5 @@ class MessageParty implements MessagePartyInterface
     $this->name = $name;
   }
 }
+
+class InvalidPhoneNumberException extends \Exception {}
