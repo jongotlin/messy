@@ -20,11 +20,10 @@ class MosmsProvider implements ProviderInterface
     $url = 'http://www.mosms.com/se/sms-send.php';
     
     foreach ($message->getRecipients() as $recipient) {
-      $result[] = file_get_contents($url . "?username=" . $this->username
+      file_get_contents($url . "?username=" . $this->username
       	. "&password=" . $this->password . "&nr=" . $this->transformNormalizedPhoneNumber($recipient->getNormalizedPhoneNumber()) . "&type=text"
       	. "&data=" . rawurlencode(utf8_decode($message->getMessageBody())));
     }
-    return $result;
   }
 
   public function supports(MessageInterface $message)
