@@ -1,0 +1,20 @@
+{
+    "name": "jgi/messy",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jon Gotlin",
+            "email": "jon@jongotlin.se"
+        },
+        {
+            "name": "Magnus Nordlander",
+            "email": "magnus@nordlander.se"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"Messy\\": "src/"}
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
